@@ -2,6 +2,7 @@ package raw
 
 import (
 	"context"
+	"log"
 	"testing"
 	"time"
 
@@ -27,6 +28,7 @@ type RawUserModel struct {
 	FloatOpt *float64 `json:"floatOpt"`
 	Bool     bool     `json:"bool"`
 	BoolOpt  *bool    `json:"boolOpt"`
+	Byt      []byte   `json:"byt"`
 }
 
 func TestRaw(t *testing.T) {
@@ -36,6 +38,7 @@ func TestRaw(t *testing.T) {
 	i := 5
 	f := 5.5
 	b := false
+	by := []byte{}
 
 	tests := []struct {
 		name   string
@@ -60,6 +63,7 @@ func TestRaw(t *testing.T) {
 					floatOpt: 5.5,
 					bool: true,
 					boolOpt: false,
+					byt: Bytes[]
 				}) {
 					id
 				}
@@ -80,6 +84,7 @@ func TestRaw(t *testing.T) {
 					floatOpt: 5.5,
 					bool: true,
 					boolOpt: false,
+					byt: Bytes[]
 				}) {
 					id
 				}
@@ -90,6 +95,8 @@ func TestRaw(t *testing.T) {
 			if err := client.Prisma.QueryRaw(`SELECT * FROM "User"`).Exec(ctx, &actual); err != nil {
 				t.Fatalf("fail %s", err)
 			}
+
+			log.Printf("And for the next trick, the value is: %v", actual)
 
 			expected := []RawUserModel{{
 				ID:       "id1",
@@ -103,6 +110,7 @@ func TestRaw(t *testing.T) {
 				FloatOpt: &f,
 				Bool:     true,
 				BoolOpt:  &b,
+				Byt:      by,
 			}, {
 				ID:       "id2",
 				Email:    "email2",
@@ -115,6 +123,7 @@ func TestRaw(t *testing.T) {
 				FloatOpt: &f,
 				Bool:     true,
 				BoolOpt:  &b,
+				Byt:      by,
 			}}
 
 			assert.Equal(t, expected, actual)
