@@ -1,4 +1,4 @@
-module github/oayomide/prisma-client-go
+module github/prisma/prisma-client-go
 
 go 1.16
 
