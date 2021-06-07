@@ -43,7 +43,7 @@ var builtin = map[string]string{
 	"Float":    "float64",
 	"DateTime": "DateTime",
 	"Json":     "JSON",
-	"Bytes":    "Bytes",
+	"Bytes":    "[]byte",
 	"BigInt":   "BigInt",
 }
 
